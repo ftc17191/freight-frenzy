@@ -1,20 +1,24 @@
 package org.firstinspires.ftc.teamcode.robot;
 
-import org.firstinspires.ftc.teamcode.config.Config;
-import org.firstinspires.ftc.teamcode.ftclayer.drivetrain.mechanum.Mechanum;
-import org.firstinspires.ftc.teamcode.ftclayer.hardware.motors.MotorEx;
+
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.ftc17191.ftclayer.drivetrain.mecanum.Mecanum;
+import org.ftc17191.ftclayer.hardware.motors.motorex.MotorEx;
+import org.ftc17191.ftclayer.hardware.servo.simulatedservo.SimulatedServo;
 
 public class Robot
 {
-    private Config conf;
-    private Mechanum drive;
-    private MotorEx carousel_turner;
 
-    public Robot(Config config)
-    {
-        conf = config;
+    public Mecanum drive;
+    public MotorEx carousel;
+    public SimulatedServo arm;
+
+    public Robot(HardwareMap hardwareMap) {
+        drive = new Mecanum(hardwareMap,
+                "motor0",
+                "motor1",
+                "motor2",
+                "motor3");
+
     }
-
-
-
 }
