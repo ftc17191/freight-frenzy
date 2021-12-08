@@ -1,0 +1,46 @@
+#!/bin/bash
+
+
+if [ $# == 0 ]; then
+  echo "connect: Connect the Control Hub, and connect to the 17191-RC WiFi."
+  read -p "connect: Give a port to connect over: " FTCPORT
+
+  adb tcpip $FTCPORT
+  RETURNVAL=$?
+  if [ $RETURNVAL -ne 0 ]; then
+    echo "connect: Error restarting with 'adb tcpip $FTCPORT', check your usb connection."
+    exit $RETURNVAL
+  fi
+
+  echo "connect: Successfully restarted with port $FTCPORT."
+  echo "connect: Attempting to connect..."
+
+  adb connect 192.168.43.1:$FTCPORT
+  RETURNVAL=$?
+  if [ $RETURNVAL -ne 0 ]; then
+    echo "connect: Error connecting 'adb connect 192.168.43.1:$FTCPORT', check your WiFi Connection."
+    exit $RETURNVAL
+  fi
+
+  echo "connect: Successfully connected!"
+  echo "connect: You can now safely disconnect the USB cable."
+else
+  FTCPORT=$1
+
+  adb tcpip $FTCPORT
+  RETURNVAL=$?
+  if [ $RETURNVAL -ne 0 ]; then
+    echo "connect: Error restarting with 'adb tcpip $FTCPORT', check your usb connection."
+    exit $RETURNVAL
+  fi
+
+  echo "connect: Successfully restarted with port $FTCPORT."
+  echo "connect: Attempting to connect..."
+
+  adb connect 192.168.43.1:$FTCPORT
+  RETURNVAL=$?
+  if [ $RETURNVAL -ne 0 ]; then
+    echo "connect: Error connecting 'adb connect 192.168.43.1:$FTCPORT', check your WiFi Connection."
+    exit $RETURNVAL
+  fi
+fi
