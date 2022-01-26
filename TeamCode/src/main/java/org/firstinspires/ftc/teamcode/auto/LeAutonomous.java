@@ -79,8 +79,7 @@ public class LeAutonomous extends LinearOpMode {
 
         // wait till we are there
         while (robot.imu.getHeading() < initial - 90)
-        {
-        }
+        { }
         robot.train.frontRightMotor.setPower(0);
         robot.train.frontLeftMotor.setPower(0);
         robot.train.backRightMotor.setPower(0);
