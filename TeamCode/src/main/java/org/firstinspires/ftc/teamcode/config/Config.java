@@ -14,8 +14,6 @@ public class Config {
 
     // reader stuff
     private final String pathToProp = "/storage/emulated/0/ftc17191/config.prop";
-    private FileReader reader;
-    private FileWriter writer;
 
     private Properties prop;
 
@@ -32,12 +30,13 @@ public class Config {
 
     public Team getTeam()
     {
-        if (prop.getProperty("team").equals("red")) {
+        if (prop.getProperty("team") == "red") {
             return Team.RED;
-        } else if (prop.getProperty("team").equals("blue")){
+        } else if (prop.getProperty("team") == "blue"){
             return Team.BLUE;
+        } else {
+            return null;
         }
-        return null;
     }
 
     public void setTeam(Team team)

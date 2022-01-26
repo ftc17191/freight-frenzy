@@ -47,6 +47,14 @@ android {
             storeFile rootProject.file('libs/ftc.debug.keystore')
             storePassword 'android'
         }
+
+        debuglocal {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile rootProject.file('libs/ftc.debug.keystore')
+            storePassword 'android'
+
+        }
     }
 
     aaptOptions {
@@ -70,8 +78,6 @@ android {
          * We accomplish this with the help of a funky little Groovy script that maintains that
          * correspondence automatically.
          *
-         * @see <a href="http://developer.android.com/tools/building/configuring-gradle.html">Configure Your Build</a>
-         * @see <a href="http://developer.android.com/tools/publishing/versioning.html">Versioning Your App</a>
          */
         def manifestFile = project(':FtcRobotController').file('src/main/AndroidManifest.xml');
         def manifestText = manifestFile.getText()
@@ -108,6 +114,27 @@ android {
             }
         }
         debug {
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable true
+            ndk {
+                abiFilters "armeabi-v7a", "arm64-v8a"
+            }
+
+            if (useProguard) {
+                minifyEnabled true
+                proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                        'proguard-rules.pro'
+                println(getProguardFiles())
+            }
+
+            dependencies {
+                implementation 'com.github.ftc17191:FTCLayer:+'
+
+            }
+        }
+
+        debuglocal {
             debuggable true
             jniDebuggable true
             renderscriptDebuggable true

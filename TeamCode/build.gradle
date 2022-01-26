@@ -23,5 +23,6 @@ dependencies {
     implementation 'com.acmerobotics.roadrunner:core:0.5.4'
     
     // FTC Layer dependency
-    implementation 'com.github.ftc17191:FTCLayer:+'
+    // implementation 'com.github.ftc17191:ftclayer:1.0.7'
+
 }
