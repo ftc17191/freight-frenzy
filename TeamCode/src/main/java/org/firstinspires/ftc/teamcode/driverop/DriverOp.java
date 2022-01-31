@@ -8,16 +8,11 @@ import org.firstinspires.ftc.teamcode.config.Config;
 import org.firstinspires.ftc.teamcode.robot.Robot;
 
 
-@TeleOp(name = "2 Person DriverOp", group = "Iterative Opmode")
+@TeleOp(name = "DriverOp", group = "Iterative Opmode")
 public class DriverOp extends OpMode {
 
     Robot robot;
-    int armTarget = 0;
-
-    int firstLevelTarget = 0;
-    int secondLevelTarget = 0;
-    int thirdLevelTarget = 0;
-    int armLimit = 1440;
+    double stopTime = 122;
 
     boolean isTriggerPressed = false;
     @Override
@@ -34,7 +29,6 @@ public class DriverOp extends OpMode {
     @Override
     public void start() {
         resetStartTime();
-        armTarget = 0;
     }
 
     @Override
@@ -54,18 +48,12 @@ public class DriverOp extends OpMode {
             robot.carousel.setPower(0);
         }
 
-        if (gamepad2.dpad_up && armTarget < armLimit) {
-            armTarget++;
-        } else if (gamepad2.dpad_down && armTarget > 0) {
-            armTarget--;
-        }
 
-        robot.arm.dcMotor.setTargetPosition(armTarget);
-        robot.arm.dcMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        while(robot.arm.dcMotor.isBusy()) {
-            robot.arm.setPower(.75);
-        }
-        robot.arm.setPower(0);
+
+        robot.arm.setPower(gamepad2.right_stick_y);
+
+
+
 
 
         if (gamepad2.right_trigger > 0.05 && !isTriggerPressed)
@@ -84,10 +72,10 @@ public class DriverOp extends OpMode {
             isTriggerPressed = false;
         }
 
-        telemetry.addData("Arm Target Pos", armTarget);
-        telemetry.addData("current armpos", robot.arm.dcMotor.getTargetPosition());
-
-        telemetry.addData("GP2 left stick y val", gamepad2.left_stick_y);
+        telemetry.addData("Elapsed Time", getRuntime());
+        if (getRuntime() > stopTime)
         telemetry.update();
     }
+
 }
+
