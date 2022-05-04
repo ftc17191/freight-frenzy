@@ -41,7 +41,8 @@ public class Robot
                 "motor0",
                 "motor1",
                 "motor2",
-                "motor3");
+                "motor3",
+                "imu");
         carousel = new MotorEx(hardwareMap, "motor4");
         arm = new MotorEx(hardwareMap, "motor5");
         rightGripper = hardwareMap.get(Servo.class, "servo0");
