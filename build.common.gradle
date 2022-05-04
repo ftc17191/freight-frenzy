@@ -129,8 +129,7 @@ android {
             }
 
             dependencies {
-                implementation 'com.github.ftc17191:FTCLayer:+'
-
+//                implementation 'com.github.ftc17191:FTCLayer:+'
             }
         }
 
@@ -147,6 +146,10 @@ android {
                 proguardFiles getDefaultProguardFile('proguard-android.txt'),
                         'proguard-rules.pro'
                 println(getProguardFiles())
+            }
+
+            dependencies {
+                implementation files('../libs/ftclayer-debug.aar')
             }
         }
     }
